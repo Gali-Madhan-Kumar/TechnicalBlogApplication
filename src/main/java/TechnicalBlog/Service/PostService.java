@@ -9,6 +9,10 @@ import java.util.Date;
 @Service
 public class PostService {
 
+    public PostService() {
+        System.out.println("*** Post Service ***");
+    }
+
     public ArrayList<Post> getAllPosts() {
         ArrayList<Post> posts = new ArrayList<>();
 
@@ -45,5 +49,9 @@ public class PostService {
         posts.add(post1);
 
         return posts;
+    }
+
+    public void createPost(Post newPost) {
+
     }
 }

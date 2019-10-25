@@ -3,6 +3,7 @@ package TechnicalBlog.Controller;
 import TechnicalBlog.Model.Post;
 import TechnicalBlog.Model.User;
 import TechnicalBlog.Service.PostService;
+import TechnicalBlog.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,9 @@ public class UserController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("users/login")
     public String login() {
         return "users/login";
@@ -29,7 +33,16 @@ public class UserController {
 
     @RequestMapping(value = "users/login", method = RequestMethod.POST)
     public String loginUser(User user) {
-        return "redirect:/posts";
+        if (userService.login(user)) {
+            return "redirect:/posts";
+        } else {
+            return "users/invalidDetails";
+        }
+    }
+
+    @RequestMapping(value = "users/registration", method = RequestMethod.POST)
+    public String registerUser(User user) {
+        return "users/login";
     }
 
     @RequestMapping(value = "users/logout", method = RequestMethod.POST)
